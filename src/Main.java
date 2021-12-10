@@ -24,14 +24,11 @@ public class Main {
             boolean flag = true;
             for (int i = 0; i < string.length(); i++) {
                 char curr = string.charAt(i);
-                if (oc.containsKey(curr)) {
-                    stack.push(curr);
-                } else {
-                    if (oc.get(stack.peek()).k == curr) stack.pop();
-                    else {
-                        flag = false;
-                        break;
-                    }
+                if (oc.containsKey(curr)) stack.push(curr);
+                else if (oc.get(stack.peek()).k == curr) stack.pop();
+                else {
+                    flag = false;
+                    break;
                 }
             }
             if (flag) list.add(stack);
@@ -70,14 +67,11 @@ public class Main {
             stack = new Stack<>();
             for (int i = 0; i < string.length(); i++) {
                 char curr = string.charAt(i);
-                if (oc.containsKey(curr)) {
-                    stack.push(curr);
-                } else {
-                    if (oc.get(stack.peek()) == curr) stack.pop();
-                    else {
-                        sum += cv.get(curr);
-                        break;
-                    }
+                if (oc.containsKey(curr)) stack.push(curr);
+                else if (oc.get(stack.peek()) == curr) stack.pop();
+                else {
+                    sum += cv.get(curr);
+                    break;
                 }
             }
         }
