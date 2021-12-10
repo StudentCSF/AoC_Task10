@@ -9,11 +9,11 @@ public class Main {
     static void task102() {
         Scanner in = new Scanner(System.in);
 
-        Map<Character, KeyValue> oc = new HashMap<>();
-        oc.put('[', new KeyValue(']', 2));
-        oc.put('{', new KeyValue('}', 3));
-        oc.put('(', new KeyValue(')', 1));
-        oc.put('<', new KeyValue('>', 4));
+        Map<Character, KeyValue<Character, Integer>> oc = new HashMap<>();
+        oc.put('[', new KeyValue<>(']', 2));
+        oc.put('{', new KeyValue<>('}', 3));
+        oc.put('(', new KeyValue<>(')', 1));
+        oc.put('<', new KeyValue<>('>', 4));
 
         List<Stack<Character>> list = new ArrayList<>();
         Stack<Character> stack;
@@ -84,13 +84,26 @@ public class Main {
         System.out.println(sum);
     }
 
-    static class KeyValue {
-        char k;
-        int v;
+    static class KeyValue<K, V> {
+        K k;
+        V v;
 
-        public KeyValue(char k, int v) {
+        public KeyValue(K k, V v) {
             this.k = k;
             this.v = v;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            KeyValue<?, ?> keyValue = (KeyValue<?, ?>) o;
+            return Objects.equals(k, keyValue.k) && Objects.equals(v, keyValue.v);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(k, v);
         }
     }
 }
